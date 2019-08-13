@@ -5,21 +5,19 @@
  */
 package datlt.controllers.admin;
 
-import datlt.dtos.RegistrationDTO;
-import datlt.models.RegistrationDAO;
+import datlt.dtos.ProductDTO;
+import datlt.models.ProductDAO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author LEE
  */
-public class AdminSearchAccountController extends HttpServlet {
+public class AdminEditProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,16 +32,14 @@ public class AdminSearchAccountController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            String search = request.getParameter("txtSearch");
-            RegistrationDAO dao = new RegistrationDAO();
-            HttpSession session = request.getSession();
-            String adminName = (String) session.getAttribute("USER");
-            List<RegistrationDTO> list = dao.findByLikeName(search, adminName);
-            request.setAttribute("INFO_USER", list);
+            String id = request.getParameter("id");
+            ProductDAO dao = new ProductDAO();
+            ProductDTO dto = dao.findByPrimaryKey(id);
+            request.setAttribute("DTO_PRODUCT",dto);
         } catch (Exception e) {
-            log("Error at Search user " + e.getMessage());
+            log("Error at Admin Edit Product "+e.getMessage());
         } finally {
-            request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/updateProduct.jsp").forward(request, response);
         }
     }
 

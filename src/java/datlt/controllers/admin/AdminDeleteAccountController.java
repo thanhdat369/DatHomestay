@@ -43,7 +43,7 @@ public class AdminDeleteAccountController extends HttpServlet {
                 request.setAttribute("ERROR", "Cannot delete");
             }
         } catch (Exception e) {
-            log("Error at DeleteController " + e.getMessage());
+            log("Error at Delete Account Controller " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

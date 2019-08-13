@@ -31,7 +31,7 @@
         <![endif]-->
         <style type="text/css">
             body{
-                background-image: url("/DatHomestay/image/6.jpg");
+                background-image: url("/DatHomestay/image/background.jpg");
                 background-size: cover;
                 background-color: lightblue;
             }

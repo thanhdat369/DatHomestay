@@ -23,13 +23,16 @@
                         <a href="/DatHomestay/admin/admin.jsp" class="active"><i class="fa fa-dashboard fa-fw"></i> User Manager</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Acessory<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Room<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/DatHomestay/admin/accessory.jsp">Manager Accessory</a>
+                                <a href="/DatHomestay/admin/room.jsp">Manager Room</a>
                             </li>
                             <li>
-                                <a href="/DatHomestay/admin/addAccessory.jsp">Add Accessory</a>
+                                <a href="/DatHomestay/admin/addRoom.jsp">Add New Room</a>
+                            </li>
+                            <li>
+                                <a href="/DatHomestay/AdminGetAllDeleteRoomController">List Deleted Room</a>
                             </li>
                         </ul>
                     </li>
@@ -41,6 +44,17 @@
                             </li>
                             <li>
                                 <a href="/DatHomestay/admin/addService.jsp">Add Service</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Product<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/DatHomestay/admin/product.jsp">Manager Product</a>
+                            </li>
+                            <li>
+                                <a href="/DatHomestay/admin/addProduct.jsp">Add Product</a>
                             </li>
                         </ul>
                     </li>

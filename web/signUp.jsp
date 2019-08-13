@@ -33,7 +33,7 @@
             <![endif]-->
             <style type="text/css">
                 body{
-                    background-image: url("/DatHomestay/image/6.jpg");
+                    background-image: url("/DatHomestay/image/background.jpg");
                     background-size: cover;
                     background-color: lightblue;
                 }
@@ -88,16 +88,6 @@
 
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Phone No (10 number begin by 0)" name="txtPhoneNo" value="${param.txtPhoneNo}" pattern="(0)+([0-9]{9})" type="text" title="Must be a phone number">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>
-                                                Your Role
-                                            </label>
-                                            <select class="form-control" name="cmbRole">
-                                                <option value="admin"> Admin </option>
-                                                <option value="staff">Staff</option>
-                                                <option value="user">User</option>
-                                            </select>
                                         </div>
                                         <!-- Change this to a button or input when using this as a form -->
                                         <input type="submit" name="action" value="Sign Up" class="btn btn-lg btn-outline btn-info btn-block"/>

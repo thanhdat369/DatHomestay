@@ -5,21 +5,19 @@
  */
 package datlt.controllers.admin;
 
-import datlt.dtos.RegistrationDTO;
-import datlt.models.RegistrationDAO;
+import datlt.dtos.ServiceDTO;
+import datlt.models.ServiceDAO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author LEE
  */
-public class AdminSearchAccountController extends HttpServlet {
+public class AdminEditServiceController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,16 +32,14 @@ public class AdminSearchAccountController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            String search = request.getParameter("txtSearch");
-            RegistrationDAO dao = new RegistrationDAO();
-            HttpSession session = request.getSession();
-            String adminName = (String) session.getAttribute("USER");
-            List<RegistrationDTO> list = dao.findByLikeName(search, adminName);
-            request.setAttribute("INFO_USER", list);
+            String id = request.getParameter("id");
+            ServiceDAO dao = new ServiceDAO();
+            ServiceDTO dto = dao.findByPrimaryKey(id);
+            request.setAttribute("DTO_SERVICE", dto);
         } catch (Exception e) {
-            log("Error at Search user " + e.getMessage());
+            log("error at edit service controller "+e.getMessage());
         } finally {
-            request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/updateService.jsp").forward(request, response);
         }
     }
 

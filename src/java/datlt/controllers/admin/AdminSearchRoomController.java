@@ -5,21 +5,20 @@
  */
 package datlt.controllers.admin;
 
-import datlt.dtos.RegistrationDTO;
-import datlt.models.RegistrationDAO;
+import datlt.dtos.RoomDTO;
+import datlt.models.RoomDAO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author LEE
  */
-public class AdminSearchAccountController extends HttpServlet {
+public class AdminSearchRoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +32,15 @@ public class AdminSearchAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
+       try {
             String search = request.getParameter("txtSearch");
-            RegistrationDAO dao = new RegistrationDAO();
-            HttpSession session = request.getSession();
-            String adminName = (String) session.getAttribute("USER");
-            List<RegistrationDTO> list = dao.findByLikeName(search, adminName);
-            request.setAttribute("INFO_USER", list);
+            RoomDAO dao = new RoomDAO();
+            List<RoomDTO> list = dao.findByLikeID(search);
+            request.setAttribute("INFO_ROOM", list);
         } catch (Exception e) {
-            log("Error at Search user " + e.getMessage());
+            log("Error at Admin Search Room " + e.getMessage());
         } finally {
-            request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/room.jsp").forward(request, response);
         }
     }
 

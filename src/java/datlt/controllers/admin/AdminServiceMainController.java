@@ -5,21 +5,24 @@
  */
 package datlt.controllers.admin;
 
-import datlt.dtos.RegistrationDTO;
-import datlt.models.RegistrationDAO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author LEE
  */
-public class AdminSearchAccountController extends HttpServlet {
+public class AdminServiceMainController extends HttpServlet {
+
+    private static final String ERROR = "error.jsp";
+    private static final String SEARCH = "AdminSearchServiceController";
+    private static final String DELETE = "AdminDeleteServiceController";
+    private static final String EDIT = "AdminEditServiceController";
+    private static final String UPDATE = "AdminUpdateServiceController";
+    private static final String ADD = "AdminAddServiceController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +36,25 @@ public class AdminSearchAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
-            String search = request.getParameter("txtSearch");
-            RegistrationDAO dao = new RegistrationDAO();
-            HttpSession session = request.getSession();
-            String adminName = (String) session.getAttribute("USER");
-            List<RegistrationDTO> list = dao.findByLikeName(search, adminName);
-            request.setAttribute("INFO_USER", list);
+            String action = request.getParameter("action");
+            if (action.equals("Search")) {
+                url = SEARCH;
+            } else if (action.equals("Delete")) {
+                url = DELETE;
+            } else if (action.equals("Edit")) {
+                url = EDIT;
+            } else if (action.equals("Update")) {
+                url = UPDATE;
+            } else if(action.equals("Add"))url = ADD;
+            else{
+                request.setAttribute("ERROR", "Action is not valid");
+            }
         } catch (Exception e) {
-            log("Error at Search user " + e.getMessage());
+            log("Error at Admin MainController " + e.getMessage());
         } finally {
-            request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

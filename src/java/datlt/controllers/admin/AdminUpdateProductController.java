@@ -5,21 +5,22 @@
  */
 package datlt.controllers.admin;
 
-import datlt.dtos.RegistrationDTO;
-import datlt.models.RegistrationDAO;
+import datlt.dtos.ProductDTO;
+import datlt.models.ProductDAO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author LEE
  */
-public class AdminSearchAccountController extends HttpServlet {
+public class AdminUpdateProductController extends HttpServlet {
+
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "AdminSearchProductController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +34,27 @@ public class AdminSearchAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
-            String search = request.getParameter("txtSearch");
-            RegistrationDAO dao = new RegistrationDAO();
-            HttpSession session = request.getSession();
-            String adminName = (String) session.getAttribute("USER");
-            List<RegistrationDTO> list = dao.findByLikeName(search, adminName);
-            request.setAttribute("INFO_USER", list);
+            String proID = request.getParameter("txtProID");
+            String proName = request.getParameter("txtProName");
+            String proPriceStr = request.getParameter("txtProPrice");
+            float price = Float.parseFloat(proPriceStr);
+            String proDes = request.getParameter("txtProDes");
+            String proType = request.getParameter("cmbProType");
+            String proImgLink = request.getParameter("txtProImgLink");
+            ProductDTO dto = new ProductDTO(proID, proName, price, proDes, proType, proImgLink);
+            ProductDAO dao = new ProductDAO();
+            boolean check = dao.update(dto);
+            if (check) {
+                url = SUCCESS;
+            } else {
+                request.setAttribute("ERROR", "Can not Update");
+            }
         } catch (Exception e) {
-            log("Error at Search user " + e.getMessage());
+            log("Error at admin Update product " + e.getMessage());
         } finally {
-            request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

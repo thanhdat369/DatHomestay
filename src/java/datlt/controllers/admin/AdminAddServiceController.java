@@ -5,21 +5,22 @@
  */
 package datlt.controllers.admin;
 
-import datlt.dtos.RegistrationDTO;
-import datlt.models.RegistrationDAO;
+import datlt.dtos.ServiceDTO;
+import datlt.models.ServiceDAO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author LEE
  */
-public class AdminSearchAccountController extends HttpServlet {
+public class AdminAddServiceController extends HttpServlet {
+
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "admin/service.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,21 +34,29 @@ public class AdminSearchAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
-            String search = request.getParameter("txtSearch");
-            RegistrationDAO dao = new RegistrationDAO();
-            HttpSession session = request.getSession();
-            String adminName = (String) session.getAttribute("USER");
-            List<RegistrationDTO> list = dao.findByLikeName(search, adminName);
-            request.setAttribute("INFO_USER", list);
+            String serviceName = request.getParameter("txtServiceName");
+            String servicePriceStr = request.getParameter("txtServicePrice");
+            float price = Float.parseFloat(servicePriceStr);
+            String serviceDescription = request.getParameter("txtServiceDes");
+            System.out.println(serviceDescription);
+            ServiceDTO dto = new ServiceDTO(serviceName, price, serviceDescription);
+            ServiceDAO dao = new ServiceDAO();
+            boolean check = dao.insert(dto);
+            if (check) {
+                url = SUCCESS;
+            } else {
+                request.setAttribute("ERROR", "Can not signUp");
+            }
         } catch (Exception e) {
-            log("Error at Search user " + e.getMessage());
+            log("Error at Sign Up " + e.getMessage());
         } finally {
-            request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

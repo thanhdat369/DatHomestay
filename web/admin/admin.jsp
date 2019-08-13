@@ -62,14 +62,14 @@
                                                         <form action="AdminMainController" method="POST">
                                                             <input type="hidden" name="id" value="${account.username}"/>
                                                             <input type="hidden" name="txtSearch" value="${param.txtSearch}"/>
-                                                            <input class="btn btn-default" type="submit" name="action" value="Delete"/>
+                                                            <input class="btn btn-block btn-outline btn-danger" type="submit" name="action" value="Delete"/>
                                                         </form>
                                                     </td>
                                                     <td>
                                                         <form action="AdminMainController" method="POST">
                                                             <input type="hidden" name="id" value="${account.username}"/>
                                                             <input type="hidden" name="txtSearch" value="${param.txtSearch}"/>
-                                                            <input class="btn btn-default" type="submit" name="action" value="Edit"/>
+                                                            <input class="btn btn-block btn-outline btn-danger" type="submit" name="action" value="Edit"/>
                                                         </form>
                                                     </td>
                                                 </tr>

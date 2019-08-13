@@ -5,21 +5,22 @@
  */
 package datlt.controllers.admin;
 
-import datlt.dtos.RegistrationDTO;
-import datlt.models.RegistrationDAO;
+import datlt.dtos.ServiceDTO;
+import datlt.models.ServiceDAO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author LEE
  */
-public class AdminSearchAccountController extends HttpServlet {
+public class AdminUpdateServiceController extends HttpServlet {
+
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "AdminSearchServiceController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +34,25 @@ public class AdminSearchAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
-            String search = request.getParameter("txtSearch");
-            RegistrationDAO dao = new RegistrationDAO();
-            HttpSession session = request.getSession();
-            String adminName = (String) session.getAttribute("USER");
-            List<RegistrationDTO> list = dao.findByLikeName(search, adminName);
-            request.setAttribute("INFO_USER", list);
+            String id = request.getParameter("id");
+            String serviceName = request.getParameter("txtServiceName");
+            String servicePriceStr = request.getParameter("txtServicePrice");
+            float price = Float.parseFloat(servicePriceStr);
+            String serviceDes = request.getParameter("txtServiceDes");
+            ServiceDTO dto = new ServiceDTO(id, serviceName, price, serviceDes);
+            ServiceDAO dao = new ServiceDAO();
+            boolean check = dao.update(dto);
+            if (check) {
+                url = SUCCESS;
+            } else {
+                request.setAttribute("ERROR", "Can not update");
+            }
         } catch (Exception e) {
-            log("Error at Search user " + e.getMessage());
+            log("Error at Update Service " + e.getMessage());
         } finally {
-            request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
