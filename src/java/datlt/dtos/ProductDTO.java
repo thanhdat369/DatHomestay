@@ -15,24 +15,35 @@ public class ProductDTO implements Serializable{
     private String proID,proName;
     private float proPrice;
     private String proDes,proType,proImgLink;
+    private int proQuantity;
 
-    public ProductDTO(String proName, float proPrice, String proDes, String proType, String proImgLink) {
+    public ProductDTO(String proName, float proPrice, String proDes, String proType, String proImgLink, int proQuantity) {
         this.proName = proName;
         this.proPrice = proPrice;
         this.proDes = proDes;
         this.proType = proType;
         this.proImgLink = proImgLink;
+        this.proQuantity = proQuantity;
     }
 
-    public ProductDTO(String proID, String proName, float proPrice, String proDes, String proType, String proImgLink) {
+    public ProductDTO(String proID, String proName, float proPrice, String proDes, String proType, String proImgLink, int proQuantity) {
         this.proID = proID;
         this.proName = proName;
         this.proPrice = proPrice;
         this.proDes = proDes;
         this.proType = proType;
         this.proImgLink = proImgLink;
+        this.proQuantity = proQuantity;
     }
 
+    public int getProQuantity() {
+        return proQuantity;
+    }
+
+    public void setProQuantity(int proQuantity) {
+        this.proQuantity = proQuantity;
+    }
+    
     public String getProID() {
         return proID;
     }

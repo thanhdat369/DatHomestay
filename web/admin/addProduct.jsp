@@ -38,6 +38,10 @@
                                     <input class="form-control" placeholder="Link image" name="txtProImgLink" maxlength="100" type="text" required/>
                                 </div>
                                 <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input class="form-control" placeholder="Quantity" name="txtProQuantity" max="1000000" type="number" required/>
+                                </div>
+                                <div class="form-group">
                                     <label>Type</label>
                                     <select class="form-control" name="cmbProType">
                                         <option value="food"> Food </option>

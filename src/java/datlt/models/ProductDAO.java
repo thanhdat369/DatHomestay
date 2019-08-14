@@ -40,7 +40,7 @@ public class ProductDAO implements Serializable {
         List<ProductDTO> list = null;
         ProductDTO dto = null;
         try {
-            String sql = "SELECT proID,proName,proPrice,proDes,proType,proImgLink FROM tbl_Product where proName like ? and isDelete='false'";
+            String sql = "SELECT proID,proName,proPrice,proDes,proType,proImgLink,proQuantity FROM tbl_Product where proName like ? and isDelete='false'";
             conn = MyConnection.getMyConnection();
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, "%" + search + "%");
@@ -49,6 +49,7 @@ public class ProductDAO implements Serializable {
             while (rs.next()) {
                 String proID, proName;
                 float proPrice;
+                int proQuantity;
                 String proDes, proType, proImgLink;
                 proID = rs.getString("proID");
                 proName = rs.getString("proName");
@@ -56,7 +57,8 @@ public class ProductDAO implements Serializable {
                 proDes = rs.getString("proDes");
                 proType = rs.getString("proType");
                 proImgLink = rs.getString("proImgLink");
-                dto = new ProductDTO(proID, proName, proPrice, proDes, proType, proImgLink);
+                proQuantity = rs.getInt("proQuantity");
+                dto = new ProductDTO(proID, proName, proPrice, proDes, proType, proImgLink, proQuantity);
                 list.add(dto);
             }
         } finally {
@@ -82,7 +84,7 @@ public class ProductDAO implements Serializable {
     public ProductDTO findByPrimaryKey(String id) throws Exception {
         ProductDTO dto = null;
         try {
-            String sql = "SELECT proName,proPrice,proDes,proType,proImgLink FROM tbl_Product where proID=?";
+            String sql = "SELECT proName,proPrice,proDes,proType,proImgLink,proQuantity FROM tbl_Product where proID=?";
             conn = MyConnection.getMyConnection();
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, id);
@@ -91,12 +93,14 @@ public class ProductDAO implements Serializable {
                 String proName;
                 float proPrice;
                 String proDes, proType, proImgLink;
+                int proQuantity;
                 proName = rs.getString("proName");
                 proPrice = rs.getFloat("proPrice");
                 proDes = rs.getString("proDes");
                 proType = rs.getString("proType");
                 proImgLink = rs.getString("proImgLink");
-                dto = new ProductDTO(id, proName, proPrice, proDes, proType, proImgLink);
+                proQuantity = rs.getInt("proQuantity");
+                dto = new ProductDTO(id, proName, proPrice, proDes, proType, proImgLink, proQuantity);
             }
         } finally {
             closeConnection();
@@ -107,7 +111,7 @@ public class ProductDAO implements Serializable {
     public boolean update(ProductDTO dto) throws Exception {
         boolean check = false;
         try {
-            String sql = "UPDATE tbl_Product set proName=?,proPrice=?,proDes=?,proType=?,proImgLink=? where proID = ?";
+            String sql = "UPDATE tbl_Product set proName=?,proPrice=?,proDes=?,proType=?,proImgLink=?,proQuantity=? where proID = ?";
             conn = MyConnection.getMyConnection();
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, dto.getProName());
@@ -115,7 +119,8 @@ public class ProductDAO implements Serializable {
             preStm.setString(3, dto.getProDes());
             preStm.setString(4, dto.getProType());
             preStm.setString(5, dto.getProImgLink());
-            preStm.setString(6, dto.getProID());
+            preStm.setInt(6, dto.getProQuantity());
+            preStm.setString(7, dto.getProID());
             check = preStm.executeUpdate() > 0;
         } finally {
             closeConnection();
@@ -126,7 +131,7 @@ public class ProductDAO implements Serializable {
     public boolean insert(ProductDTO dto) throws Exception {
         boolean check = false;
         try {
-            String sql = "INSERT INTO tbl_Product(proName,proPrice,proDes,proType,proImgLink,isDelete) values(?,?,?,?,?,'false')";
+            String sql = "INSERT INTO tbl_Product(proName,proPrice,proDes,proType,proImgLink,proQuantity,isDelete) values(?,?,?,?,?,?,'false')";
             conn = MyConnection.getMyConnection();
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, dto.getProName());
@@ -134,6 +139,7 @@ public class ProductDAO implements Serializable {
             preStm.setString(3, dto.getProDes());
             preStm.setString(4, dto.getProType());
             preStm.setString(5, dto.getProImgLink());
+            preStm.setInt(6, dto.getProQuantity());
             check = preStm.executeUpdate() > 0;
         } finally {
             closeConnection();

@@ -43,6 +43,7 @@
                                                     <th>Name</th>
                                                     <th>Price</th>
                                                     <th>Description</th>
+                                                    <th>Quantity</th>
                                                     <th>Type</th>
                                                     <th>Delete</th>
                                                     <th>Edit</th>
@@ -55,6 +56,7 @@
                                                         <td>${product.proName}</td>
                                                         <td>${product.proPrice}</td>
                                                         <td>${product.proDes}</td>
+                                                        <td>${product.proQuantity}</td>
                                                         <td>${product.proType}</td>
                                                         <td>
                                                             <form action="/DatHomestay/AdminProductMainController" method="POST">

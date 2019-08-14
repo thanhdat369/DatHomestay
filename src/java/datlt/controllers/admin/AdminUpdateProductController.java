@@ -43,7 +43,10 @@ public class AdminUpdateProductController extends HttpServlet {
             String proDes = request.getParameter("txtProDes");
             String proType = request.getParameter("cmbProType");
             String proImgLink = request.getParameter("txtProImgLink");
-            ProductDTO dto = new ProductDTO(proID, proName, price, proDes, proType, proImgLink);
+            String proQuantityStr = request.getParameter("txtProQuantity");
+            System.out.println(proQuantityStr);
+            int proQuantity = Integer.parseInt(proQuantityStr);
+            ProductDTO dto = new ProductDTO(proID, proName, price, proDes, proType, proImgLink, proQuantity);
             ProductDAO dao = new ProductDAO();
             boolean check = dao.update(dto);
             if (check) {

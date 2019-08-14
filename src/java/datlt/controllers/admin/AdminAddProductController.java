@@ -8,7 +8,6 @@ package datlt.controllers.admin;
 import datlt.dtos.ProductDTO;
 import datlt.models.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +42,9 @@ public class AdminAddProductController extends HttpServlet {
             String proDes = request.getParameter("txtProDes");
             String proType = request.getParameter("cmbProType");
             String proImgLink = request.getParameter("txtProImgLink");
-            ProductDTO dto = new ProductDTO(proName, price, proDes, proType, proImgLink);
+            String proQuantityStr = request.getParameter("txtProQuantity");
+            int proQuantity = Integer.parseInt(proQuantityStr);
+            ProductDTO dto = new ProductDTO(proName, price, proDes, proType, proImgLink, proQuantity);
             ProductDAO dao = new ProductDAO();
             boolean check = dao.insert(dto);
             if (check) {

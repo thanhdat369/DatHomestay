@@ -40,15 +40,19 @@
                                 <div class="form-group">
                                     <label>Image Link</label>
                                     <input class="form-control" placeholder="Link image" name="txtProImgLink" maxlength="100" type="text" value="${requestScope.DTO_PRODUCT.proImgLink}" required/>
-                                    <input type="hidden" name="txtSearch" value="${param.txtSearch}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input class="form-control" placeholder="Quantity" name="txtProQuantity" min="0" max="1000000" value="${requestScope.DTO_PRODUCT.proQuantity}" type="number" required/>
                                 </div>
                                 <div class="form-group">
                                     <label>Type</label>
                                     <select class="form-control" name="cmbProType">
                                         <option value="food" <c:if test="${requestScope.DTO_PRODUCT.proType eq 'food'}">selected</c:if>> Food </option>
                                         <option value="drink" <c:if test="${requestScope.DTO_PRODUCT.proType eq 'drink'}">selected</c:if>>Drink</option>
-                                    </select>
-                                </div>
+                                        </select>
+                                    </div>
+                                    <input type="hidden" name="txtSearch" value="${param.txtSearch}"/>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="submit" name="action" value="Update" class="btn btn-lg btn-outline btn-info btn-block"/>
                             </form>
