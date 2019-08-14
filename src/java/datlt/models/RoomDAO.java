@@ -74,6 +74,7 @@ public class RoomDAO implements Serializable {
             result = new ArrayList<RoomDTO>();
             while (rs.next()) {
                 id = rs.getString("roomID");
+                System.out.println("id -"+id+"00");
                 gia = rs.getFloat("roomPrice");
                 des = rs.getString("roomDes");
                 imgLink = rs.getString("roomImgLink");
@@ -197,5 +198,5 @@ public class RoomDAO implements Serializable {
         return check;
 
     }
-    
+
 }

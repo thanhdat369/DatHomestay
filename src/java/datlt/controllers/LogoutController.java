@@ -5,8 +5,6 @@
  */
 package datlt.controllers;
 
-import datlt.dtos.RegistrationErrorObject;
-import datlt.models.RegistrationDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,12 +16,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author LEE
  */
-public class LoginController extends HttpServlet {
-    private static final String ERROR = "error.jsp";
-    private static final String ADMIN = "admin/admin.jsp";
-    private static final String USER = "UserGetAllRoomController";
-    private static final String STAFF = "staff/staff.jsp";
-    private static final String INVALID = "index.jsp";
+public class LogoutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,44 +30,15 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            String username = request.getParameter("txtUsername");
-            String password = request.getParameter("txtPassword");
-            RegistrationDAO dao = new RegistrationDAO();
-            String role = dao.login(username, password);
-            RegistrationErrorObject errorObj = new RegistrationErrorObject();
-            if (role.equals("failed")) {
-                errorObj.setUsernameError("Invalid username or password");
-                request.setAttribute("INVALID", errorObj);
-                url = INVALID;
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("USER", username);
-                if (role.equals("admin")) {
-                    url = ADMIN;
-                    session.setAttribute("ROLE", role);
-                } else if (role.equals("user")) {
-                    url = USER;
-                    session.setAttribute("ROLE", role);
-                }else if(role.equals("staff"))
-                {
-                   url = STAFF;
-                   session.setAttribute("ROLE", role);
-                }
-                else if (role.equals("banned")) {
-                    errorObj.setUsernameError("Your account was banned");
-                    request.setAttribute("INVALID", errorObj);
-                    url = INVALID;
-                } else {
-                    request.setAttribute("ERROR", "ROLE IS INVALID");
-                }
+            HttpSession session = request.getSession(false);
+            if(session!=null){
+                session.invalidate();
             }
         } catch (Exception e) {
-            log("Error at LoginController" + e.getMessage());
-
+            log("Error at Logout Controller "+e.getMessage());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect("index.jsp");
         }
     }
 

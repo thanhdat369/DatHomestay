@@ -112,6 +112,14 @@
         <servlet-name>AdminAddProductController</servlet-name>
         <servlet-class>datlt.controllers.admin.AdminAddProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserGetAllRoomController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserGetAllRoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>datlt.controllers.LogoutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -223,6 +231,14 @@
     <servlet-mapping>
         <servlet-name>AdminAddProductController</servlet-name>
         <url-pattern>/AdminAddProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserGetAllRoomController</servlet-name>
+        <url-pattern>/UserGetAllRoomController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
