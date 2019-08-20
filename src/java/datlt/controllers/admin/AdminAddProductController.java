@@ -53,7 +53,7 @@ public class AdminAddProductController extends HttpServlet {
                 request.setAttribute("ERROR", "Can not Insert Product");
             }
         } catch (Exception e) {
-            log("Error at admin Insert product " + e.getMessage());
+            log("Error at admin Add product " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

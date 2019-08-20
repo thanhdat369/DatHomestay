@@ -19,9 +19,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author LEE
  */
 public class SignUpController extends HttpServlet {
+
     private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "index.jsp";
     private static final String INVALID = "signUp.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,7 +36,7 @@ public class SignUpController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
+        String url = ERROR;
         RegistrationErrorObject errorObj = new RegistrationErrorObject();
         try {
             boolean valid = true;
@@ -45,30 +47,30 @@ public class SignUpController extends HttpServlet {
             String email = request.getParameter("txtEmail");
             String phoneNo = request.getParameter("txtPhoneNo");
             String role = "user";
-            if(!confirm.equals(password)) 
-            {
+            if (!confirm.equals(password)) {
                 request.setAttribute("ERROR", "Please Turn On JavaScript Or Type Confirm Match With Password");
-                valid=false;
+                valid = false;
             }
-            if(valid)
-            {
-                RegistrationDTO dto = new RegistrationDTO(username, password, fullname, email, phoneNo,role);
+            if (valid) {
+                RegistrationDTO dto = new RegistrationDTO(username, password, fullname, email, phoneNo, role);
                 RegistrationDAO dao = new RegistrationDAO();
                 boolean check = dao.signUp(dto);
                 System.out.println(check);
-                if(check) url=SUCCESS;
-                else request.setAttribute("ERROR", "Can not signUp");
+                if (check) {
+                    url = SUCCESS;
+                } else {
+                    request.setAttribute("ERROR", "Can not signUp");
+                }
             }
         } catch (Exception e) {
-            if(e.getMessage().contains("duplicate")) 
-            {   errorObj.setUsernameError("Username was existed");
+            if (e.getMessage().contains("duplicate")) {
+                errorObj.setUsernameError("Username was existed");
                 url = INVALID;
                 request.setAttribute("INVALID", errorObj);
+            } else {
+                log("Error at Sign Up " + e.getMessage());
             }
-            else
-            log("Error at Sign Up "+e.getMessage());
-        }
-        finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

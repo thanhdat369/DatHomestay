@@ -24,10 +24,10 @@
                                 <div class="form-group">
                                     <label>Room ID</label>
                                     <input class="form-control" placeholder="ID Room" name="txtRoomID" type="text" maxlength="15" required autofocus/>
-                                     <c:if test="${requestScope.INVALID!=null&&requestScope.INVALID.roomIDError!=null}">
-                                            <div class="text-danger">
-                                                <h5 style="color:red;">${requestScope.INVALID.roomIDError}</h5>
-                                            </div>
+                                    <c:if test="${requestScope.INVALID!=null&&requestScope.INVALID.roomIDError!=null}">
+                                        <div class="text-danger">
+                                            <h5 style="color:red;">${requestScope.INVALID.roomIDError}</h5>
+                                        </div>
                                     </c:if>
                                 </div>
                                 <div class="form-group">

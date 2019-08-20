@@ -6,7 +6,6 @@
 package datlt.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,9 +40,11 @@ public class MainController extends HttpServlet {
                 url = LOGIN;
             } else if (action.equals("Sign Up")) {
                 url = SIGNUP;
-            } else request.setAttribute("ERROR", "Action is not valid");
+            } else {
+                request.setAttribute("ERROR", "Action is not valid");
+            }
         } catch (Exception e) {
-            log("Error at Main " + e.getMessage());
+            log("Error at Main Controller " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datlt.controllers.admin;
+package datlt.controllers.user;
 
-import datlt.dtos.ServiceDTO;
-import datlt.models.ServiceDAO;
+import datlt.dtos.RoomDTO;
+import datlt.models.RoomDAO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author LEE
  */
-public class AdminSearchServiceController extends HttpServlet {
+public class UserShowRoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,14 +32,14 @@ public class AdminSearchServiceController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            String search = request.getParameter("txtSearch");
-            ServiceDAO dao = new ServiceDAO();
-            List<ServiceDTO> list = dao.findByLikeName(search);
-            request.setAttribute("INFO_SERVICE", list);
+            String id = request.getParameter("txtRoomID");
+            RoomDAO dao = new RoomDAO();
+            RoomDTO dto = dao.findByPrimaryKey(id);
+            request.setAttribute("DTO_ROOM", dto);
         } catch (Exception e) {
-            log("Error at Search user " + e.getMessage());
+            log("Error at Show Room Controller" + e.getMessage());
         } finally {
-            request.getRequestDispatcher("admin/service.jsp").forward(request, response);
+            request.getRequestDispatcher("user/bookRoom.jsp").forward(request, response);
         }
     }
 

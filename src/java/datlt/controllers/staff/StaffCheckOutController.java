@@ -3,24 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datlt.controllers.admin;
+package datlt.controllers.staff;
 
-import datlt.models.ServiceDAO;
+import datlt.models.RoomOrderDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author LEE
  */
-public class AdminDeleteServiceController extends HttpServlet {
-
+public class StaffCheckOutController extends HttpServlet {
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "AdminSearchServiceController";
-
+    private static final String SUCCESS = "StaffGetAllBillController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,18 +32,21 @@ public class AdminDeleteServiceController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+      String url = ERROR;
         try {
-            String id = request.getParameter("id");
-            ServiceDAO dao = new ServiceDAO();
-            boolean check = dao.delete(id);
+            RoomOrderDAO dao = new RoomOrderDAO();
+            String orderRoomID = request.getParameter("txtOrderRoomID");
+            System.out.println(orderRoomID);
+            HttpSession session = request.getSession();
+            String staffUsername = (String) session.getAttribute("USER");
+            boolean check = dao.checkoutRoom(staffUsername, orderRoomID);
             if (check) {
                 url = SUCCESS;
             } else {
-                request.setAttribute("ERROR", "Cannot delete");
+                request.setAttribute("ERROR", "CAN NOT CHECK OUT");
             }
         } catch (Exception e) {
-            log("Error at Delete Service Controller " + e.getMessage());
+            log("Error at StaffCheckController " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

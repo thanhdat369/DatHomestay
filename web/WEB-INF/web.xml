@@ -33,30 +33,6 @@
         <servlet-class>datlt.controllers.admin.AdminUpdateAccountController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdminServiceMainController</servlet-name>
-        <servlet-class>datlt.controllers.admin.AdminServiceMainController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminSearchServiceController</servlet-name>
-        <servlet-class>datlt.controllers.admin.AdminSearchServiceController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminDeleteServiceController</servlet-name>
-        <servlet-class>datlt.controllers.admin.AdminDeleteServiceController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminAddServiceController</servlet-name>
-        <servlet-class>datlt.controllers.admin.AdminAddServiceController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminEditServiceController</servlet-name>
-        <servlet-class>datlt.controllers.admin.AdminEditServiceController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminUpdateServiceController</servlet-name>
-        <servlet-class>datlt.controllers.admin.AdminUpdateServiceController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AdminRoomMainController</servlet-name>
         <servlet-class>datlt.controllers.admin.AdminRoomMainController</servlet-class>
     </servlet>
@@ -120,6 +96,26 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>datlt.controllers.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserBookRoomMainController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserBookRoomMainController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBookRoomController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserBookRoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserShowRoomController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserShowRoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffGetAllBillController</servlet-name>
+        <servlet-class>datlt.controllers.staff.StaffGetAllBillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffCheckOutController</servlet-name>
+        <servlet-class>datlt.controllers.staff.StaffCheckOutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -151,30 +147,6 @@
     <servlet-mapping>
         <servlet-name>AdminUpdateAccountController</servlet-name>
         <url-pattern>/AdminUpdateAccountController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminServiceMainController</servlet-name>
-        <url-pattern>/AdminServiceMainController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminSearchServiceController</servlet-name>
-        <url-pattern>/AdminSearchServiceController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminDeleteServiceController</servlet-name>
-        <url-pattern>/AdminDeleteServiceController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminAddServiceController</servlet-name>
-        <url-pattern>/AdminAddServiceController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminEditServiceController</servlet-name>
-        <url-pattern>/AdminEditServiceController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminUpdateServiceController</servlet-name>
-        <url-pattern>/AdminUpdateServiceController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminRoomMainController</servlet-name>
@@ -239,6 +211,26 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBookRoomMainController</servlet-name>
+        <url-pattern>/UserBookRoomMainController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBookRoomController</servlet-name>
+        <url-pattern>/UserBookRoomController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserShowRoomController</servlet-name>
+        <url-pattern>/UserShowRoomController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffGetAllBillController</servlet-name>
+        <url-pattern>/StaffGetAllBillController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffCheckOutController</servlet-name>
+        <url-pattern>/StaffCheckOutController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

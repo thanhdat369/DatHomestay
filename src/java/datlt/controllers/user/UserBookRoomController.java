@@ -3,24 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datlt.controllers.admin;
+package datlt.controllers.user;
 
-import datlt.dtos.ServiceDTO;
-import datlt.models.ServiceDAO;
+import datlt.dtos.RoomOrderObject;
+import datlt.idprocess.IDCreating;
+import datlt.models.RoomOrderDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author LEE
  */
-public class AdminUpdateServiceController extends HttpServlet {
-
-    private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "AdminSearchServiceController";
+public class UserBookRoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,25 +33,38 @@ public class AdminUpdateServiceController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            String id = request.getParameter("id");
-            String serviceName = request.getParameter("txtServiceName");
-            String servicePriceStr = request.getParameter("txtServicePrice");
-            float price = Float.parseFloat(servicePriceStr);
-            String serviceDes = request.getParameter("txtServiceDes");
-            ServiceDTO dto = new ServiceDTO(id, serviceName, price, serviceDes);
-            ServiceDAO dao = new ServiceDAO();
-            boolean check = dao.update(dto);
-            if (check) {
-                url = SUCCESS;
+            String checkinDay = request.getParameter("txtCheckinDay");
+            String checkoutDay = request.getParameter("txtCheckoutDay");
+            String id = request.getParameter("txtRoomID");
+            RoomOrderDAO dao = new RoomOrderDAO();
+            if (!(checkinDay == null || checkoutDay == null || id == null)) {
+                boolean checkBooked = !dao.isBooked(checkinDay, checkoutDay, id);
+                if (checkBooked) {
+                    HttpSession session = request.getSession();
+                    String username = (String) session.getAttribute("USER");
+                    String roomPriceStr = request.getParameter("txtRoomPrice");
+                    float roomPrice = Float.parseFloat(roomPriceStr);
+                    String totalStr = request.getParameter("txtTotal");
+                    float total = Float.parseFloat(totalStr);
+                    String roomOrderID = IDCreating.createRoomOrderID();
+                    RoomOrderObject roomOrderOject = new RoomOrderObject(roomOrderID, id, roomPrice, checkinDay, checkoutDay, username, total);
+                    boolean check = dao.bookRoom(roomOrderOject);
+                    if (check) {
+                        request.setAttribute("SUCCESS", "BOOKED SUCCESS");
+                    } else {
+                        request.setAttribute("ERROR", "ERROR WHEN BOOKING ROOM. TRY AGAIN");
+                    }
+                } else {
+                    request.setAttribute("ERROR", "ROOM WAS BOOKED ON THAT DAYS. YOU CAN CHOOSE ANOTHER DAY OR CHOOSE ANOTHER ROOM");
+                }
             } else {
-                request.setAttribute("ERROR", "Can not update");
+                request.setAttribute("ERROR", "INVALID PARAMETER");
             }
         } catch (Exception e) {
-            log("Error at Update Service " + e.getMessage());
+            log("ERROR AT BOOK ROOM " + e.getMessage());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher("user/message.jsp").forward(request, response);
         }
     }
 

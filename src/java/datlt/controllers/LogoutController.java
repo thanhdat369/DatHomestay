@@ -32,11 +32,11 @@ public class LogoutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(false);
-            if(session!=null){
+            if (session != null) {
                 session.invalidate();
             }
         } catch (Exception e) {
-            log("Error at Logout Controller "+e.getMessage());
+            log("Error at Logout Controller " + e.getMessage());
         } finally {
             response.sendRedirect("index.jsp");
         }

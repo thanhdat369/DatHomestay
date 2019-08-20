@@ -50,11 +50,13 @@
                                     <select class="form-control" name="cmbProType">
                                         <option value="food" <c:if test="${requestScope.DTO_PRODUCT.proType eq 'food'}">selected</c:if>> Food </option>
                                         <option value="drink" <c:if test="${requestScope.DTO_PRODUCT.proType eq 'drink'}">selected</c:if>>Drink</option>
+                                        <option value="service"<c:if test="${requestScope.DTO_PRODUCT.proType eq 'service'}">selected</c:if>>Service</option>
                                         </select>
                                     </div>
                                     <input type="hidden" name="txtSearch" value="${param.txtSearch}"/>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="submit" name="action" value="Update" class="btn btn-lg btn-outline btn-info btn-block"/>
+                                <hr/>
                             </form>
                         </div>
                     </div>

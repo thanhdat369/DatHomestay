@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datlt.controllers.admin;
+package datlt.controllers.user;
 
-import datlt.dtos.ServiceDTO;
-import datlt.models.ServiceDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,10 +15,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author LEE
  */
-public class AdminAddServiceController extends HttpServlet {
+public class UserBookRoomMainController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "admin/service.jsp";
+    private static final String SHOWROOM = "UserShowRoomController";
+    private static final String BOOKROOM = "UserBookRoomController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,27 +35,22 @@ public class AdminAddServiceController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String serviceName = request.getParameter("txtServiceName");
-            String servicePriceStr = request.getParameter("txtServicePrice");
-            float price = Float.parseFloat(servicePriceStr);
-            String serviceDescription = request.getParameter("txtServiceDes");
-            System.out.println(serviceDescription);
-            ServiceDTO dto = new ServiceDTO(serviceName, price, serviceDescription);
-            ServiceDAO dao = new ServiceDAO();
-            boolean check = dao.insert(dto);
-            if (check) {
-                url = SUCCESS;
+            String action = request.getParameter("action");
+            if (action.equals("Show Detail")) {
+                url = SHOWROOM;
+            } else if (action.equals("Book")) {
+                url = BOOKROOM;
             } else {
-                request.setAttribute("ERROR", "Can not signUp");
+                request.setAttribute("ERROR", "Action is not valid at user book room main controller");
             }
         } catch (Exception e) {
-            log("Error at Sign Up " + e.getMessage());
+            log("Error at User Book Room Main Controller " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

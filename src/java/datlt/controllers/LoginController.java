@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
  * @author LEE
  */
 public class LoginController extends HttpServlet {
+
     private static final String ERROR = "error.jsp";
     private static final String ADMIN = "admin/admin.jsp";
     private static final String USER = "UserGetAllRoomController";
@@ -57,12 +58,10 @@ public class LoginController extends HttpServlet {
                 } else if (role.equals("user")) {
                     url = USER;
                     session.setAttribute("ROLE", role);
-                }else if(role.equals("staff"))
-                {
-                   url = STAFF;
-                   session.setAttribute("ROLE", role);
-                }
-                else if (role.equals("banned")) {
+                } else if (role.equals("staff")) {
+                    url = STAFF;
+                    session.setAttribute("ROLE", role);
+                } else if (role.equals("banned")) {
                     errorObj.setUsernameError("Your account was banned");
                     request.setAttribute("INVALID", errorObj);
                     url = INVALID;

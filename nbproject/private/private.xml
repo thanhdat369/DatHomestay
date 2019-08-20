@@ -3,7 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MY_FILES/HocLai/DatHomestay/web/user/allRoom.jsp</file>
+            <file>file:/D:/MY_FILES/HocLai/DatHomestay/src/java/datlt/controllers/user/UserBookRoomMainController.java</file>
+            <file>file:/D:/MY_FILES/HocLai/DatHomestay/src/java/datlt/controllers/staff/StaffCheckOutController.java</file>
         </group>
     </open-files>
 </project-private>

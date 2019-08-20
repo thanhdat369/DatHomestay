@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datlt.controllers.admin;
+package datlt.controllers.staff;
 
+import datlt.dtos.RoomOrderObject;
+import datlt.models.RoomOrderDAO;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,14 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author LEE
  */
-public class AdminServiceMainController extends HttpServlet {
-
-    private static final String ERROR = "error.jsp";
-    private static final String SEARCH = "AdminSearchServiceController";
-    private static final String DELETE = "AdminDeleteServiceController";
-    private static final String EDIT = "AdminEditServiceController";
-    private static final String UPDATE = "AdminUpdateServiceController";
-    private static final String ADD = "AdminAddServiceController";
+public class StaffGetAllBillController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,25 +32,15 @@ public class AdminServiceMainController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if (action.equals("Search")) {
-                url = SEARCH;
-            } else if (action.equals("Delete")) {
-                url = DELETE;
-            } else if (action.equals("Edit")) {
-                url = EDIT;
-            } else if (action.equals("Update")) {
-                url = UPDATE;
-            } else if(action.equals("Add"))url = ADD;
-            else{
-                request.setAttribute("ERROR", "Action is not valid");
-            }
+            RoomOrderDAO dao = new RoomOrderDAO();
+            List<RoomOrderObject> list = dao.getAllBillBookedForStaff();
+            System.out.println("List size: " + list.size());
+            request.setAttribute("INFO_BILLCHECKOUT", list);
         } catch (Exception e) {
-            log("Error at Admin MainController " + e.getMessage());
+            log("Error at Staff Get All Bill Check Out" + e.getMessage());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher("staff/staff.jsp").forward(request, response);
         }
     }
 

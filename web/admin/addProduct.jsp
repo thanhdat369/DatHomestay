@@ -3,7 +3,6 @@
     Created on : Aug 13, 2019, 10:18:38 PM
     Author     : LEE
 --%>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,7 +26,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Product Price</label>
-                                    <input class="form-control" placeholder="Price" name="txtProPrice" type="number" step="any" max="1000000000" required/>
+                                    <input class="form-control" placeholder="Price" name="txtProPrice" type="number" step="any" min="0" max="1000000000" required/>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
@@ -39,13 +38,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Quantity</label>
-                                    <input class="form-control" placeholder="Quantity" name="txtProQuantity" max="1000000" type="number" required/>
+                                    <input class="form-control" placeholder="Quantity" name="txtProQuantity" min="1" max="1000000000" type="number" required/>
                                 </div>
                                 <div class="form-group">
                                     <label>Type</label>
                                     <select class="form-control" name="cmbProType">
                                         <option value="food"> Food </option>
                                         <option value="drink">Drink</option>
+                                        <option value="service">Service</option>
                                     </select>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->

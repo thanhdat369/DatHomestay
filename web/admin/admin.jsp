@@ -13,6 +13,13 @@
         <%@include file="header.jsp" %>
     </head>
     <body>
+        <script type="text/javascript">
+            function isDelete(username)
+            {
+                var check = confirm("Do you want to delete " + username+ " ?");
+                return check;
+            }
+        </script>
         <div id="wrapper">
             <%@include file="navbar.jsp" %>
             <div id="page-wrapper">
@@ -22,16 +29,11 @@
                             <h1 class="page-header">Manager Account</h1>
                             <form action="/DatHomestay/AdminMainController" method="POST">
                                 <div class="input-group custom-search-form">
-                                    <input  required class="form-control" type="text" name="txtSearch" value="" />
+                                    <input class="form-control" type="text" name="txtSearch" value="" />
                                     <span class="input-group-btn">
                                         <input class="btn btn-primary" type="submit" value="Search" name="action" />
                                     </span>
                                 </div>
-                            </form>
-                            <hr>
-                            <form action="/DatHomestay/MainController" method="POST">
-                                <input type="hidden" name="txtSearch" value="" />
-                                <input class="btn btn-primary" type="submit" value="List All" name="action" />
                             </form>
                             <hr>
                             <c:if test="${requestScope.INFO_USER!=null}">
@@ -59,7 +61,7 @@
                                                     <td>${account.phoneNo}</td>
                                                     <td>${account.role}</td>
                                                     <td>
-                                                        <form action="AdminMainController" method="POST">
+                                                        <form action="AdminMainController" method="POST" onsubmit="return(isDelete('${account.username}'))">
                                                             <input type="hidden" name="id" value="${account.username}"/>
                                                             <input type="hidden" name="txtSearch" value="${param.txtSearch}"/>
                                                             <input class="btn btn-block btn-outline btn-danger" type="submit" name="action" value="Delete"/>
@@ -84,15 +86,6 @@
                             </c:if>
                         </div>
                     </div>
-                    <hr>
-                    <!-- ... Your content goes here ... -->
-                    <h4>Edit My Profile</h4>
-                    <form action="/DatHomestay/MainController" method="POST">
-                        <input type="hidden" name="id" value="${sessionScope.USER}"/>
-                        <input type="hidden" name="txtSearch" value=""${param.txtSearch}/>
-                        <input class="btn btn-default" type="submit" name="action" value="Edit Profile"/>
-                    </form>
-                    <hr>
                 </div>
             </div>
         </div>
