@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Room Price</label>
-                                    <input class="form-control" placeholder="Price" name="txtRoomPrice" type="number" step="any" max="100000000" required/>
+                                    <input class="form-control" placeholder="Price" name="txtRoomPrice" type="number" step="any" min="0" max="100000000" required/>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>

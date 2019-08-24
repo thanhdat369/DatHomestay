@@ -86,3 +86,39 @@ function bookingRoomAjax()
     }
     return false;
 }
+function showAvailableRoomList()
+{
+    var url = "/DatHomestay/UserGetAvailableRoomController";
+    var checkinday = "txtCheckinDay=" + document.getElementById("checkinDay").value;
+    var checkoutday = "txtCheckoutDay=" + document.getElementById("checkoutDay").value;
+    var d1 = new Date(checkinday);
+    var d2 = new Date(checkoutday);
+    if (d1 <= d2)
+    {
+        var params = "action=Book" + "&" + checkinday + "&" + checkoutday;
+        console.log(params);
+        if (window.XMLHttpRequest) {
+            // code for modern browsers
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for old IE browsers
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.open("POST", url, true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//    xmlhttp.setRequestHeader("Content-length", params.length);
+//    xmlhttp.setRequestHeader("Connection", "close");
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4)
+            {
+                var a = xmlhttp.responseText;
+                document.getElementById("resultDiv").innerHTML = a;
+            }
+        }
+        xmlhttp.send(params);
+    }
+    else
+        document.getElementById("resultDiv").innerHTML = "";
+    return false;
+}
+

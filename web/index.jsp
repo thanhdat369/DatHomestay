@@ -57,15 +57,15 @@
                                     </div>
                                     <c:if test="${requestScope.INVALID!=null&&requestScope.INVALID.usernameError!=null}">
                                         <div class="text-center">
-                                        <h5 style="color:red;">${requestScope.INVALID.usernameError}</h5>
+                                            <h5 style="color:red;">${requestScope.INVALID.usernameError}</h5>
                                         </div>
                                     </c:if>
                                     <input type="submit" name="action" value="Login" class="btn btn-lg btn-outline btn-info btn-block"/>
                                     <br/>
-                                    
+
                                 </fieldset>
                                 <div class="text-center alert alert-info">
-                                    <span>Not registered? <a href="signUp.jsp">Create an account</a></span>
+                                    <span>Not registered? <a href="/DatHomestay/signUp.jsp">Create an account</a></span>
                                 </div>
                             </form>
                         </div>

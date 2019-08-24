@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <filter>
+        <filter-name>RoleFilter</filter-name>
+        <filter-class>datlt.filters.RoleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RoleFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>MainController</servlet-name>
         <servlet-class>datlt.controllers.MainController</servlet-class>
@@ -116,6 +124,42 @@
         <servlet-name>StaffCheckOutController</servlet-name>
         <servlet-class>datlt.controllers.staff.StaffCheckOutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserGetAllProductController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserGetAllProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBuyProductMainController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserBuyProductMainController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserGetAvailableRoomController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserGetAvailableRoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserAddProductController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserAddProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserEditShoppingCartController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserEditShoppingCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserCheckOutProductController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserCheckOutProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserGetAllProductBillHistoryController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserGetAllProductBillHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserGetAllRoomBillHistoryController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserGetAllRoomBillHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserViewDetailOrderProductController</servlet-name>
+        <servlet-class>datlt.controllers.user.UserViewDetailOrderProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -231,6 +275,42 @@
     <servlet-mapping>
         <servlet-name>StaffCheckOutController</servlet-name>
         <url-pattern>/StaffCheckOutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserGetAllProductController</servlet-name>
+        <url-pattern>/UserGetAllProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBuyProductMainController</servlet-name>
+        <url-pattern>/UserBuyProductMainController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserGetAvailableRoomController</servlet-name>
+        <url-pattern>/UserGetAvailableRoomController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserAddProductController</servlet-name>
+        <url-pattern>/UserAddProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserEditShoppingCartController</servlet-name>
+        <url-pattern>/UserEditShoppingCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserCheckOutProductController</servlet-name>
+        <url-pattern>/UserCheckOutProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserGetAllProductBillHistoryController</servlet-name>
+        <url-pattern>/UserGetAllProductBillHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserGetAllRoomBillHistoryController</servlet-name>
+        <url-pattern>/UserGetAllRoomBillHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserViewDetailOrderProductController</servlet-name>
+        <url-pattern>/UserViewDetailOrderProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

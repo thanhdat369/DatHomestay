@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Room Price</label>
-                                    <input class="form-control" placeholder="Price" name="txtRoomPrice" type="number" step="any" value="${requestScope.DTO_ROOM.roomPrice}" max="1000000000" required/>
+                                    <input class="form-control" placeholder="Price" name="txtRoomPrice" type="number" step="any" min="0" max="10000000000" value="${requestScope.DTO_ROOM.roomPrice}" required/>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>

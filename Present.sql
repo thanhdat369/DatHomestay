@@ -67,9 +67,7 @@ CREATE TABLE [dbo].[tbl_OrderRoom](
 GO
 
 -- Phan Trang
-  SELECT * FROM
-  (SELECT roomID,roomDes,roomImgLink,roomPrice,ROW_NUMBER() Over(ORDER BY roomID) as rownum FROM Room) as DEM
-  where rownum>=5 and rownum<=10 
+ SELECT proID,proName,proPrice,proDes,proType,proImgLink,proQuantity,rowNum FROM (SELECT proID,proName,proPrice,proDes,proType,proImgLink,proQuantity, ROW_NUMBER() OVER(ORDER BY proID) as rowNum FROM tbl_Product where isDelete='false' and proQuantity>0 )AS tbl_COUNT where rowNum>=0 and rowNum<=10 
 -- CHeck dang con o phong hay khong
 
 
@@ -103,3 +101,11 @@ CREATE TABLE tbl_OrderProductDetail(
   quantity int NOT NULL,
   primary key (orderProductID,proID)
 )
+SELECT orderRoomID,roomID,customerUsername,checkinDay,checkoutDay,createTime FROM tbl_OrderRoom where status='finished' ORDER BY createTime DESC
+SELECT orderRoomID,roomID,checkinDay,checkoutDay,total,staffUsername,status FROM tbl_OrderRoom where customerUsername='sang' ORDER BY createTime DESC
+
+SELECT proID,proPrice,quantity FROM tbl_OrderProductDetail where orderProductID = 'PR-2'
+
+SELECT username,total,timeCreate FROM tbl_OrderProduct where orderProductID= 'PR-2'
+SELECT roomID,roomPrice,roomDes,roomImgLink FROM tbl_Room where isDelete='false' AND roomID NOT IN (SELECT roomID FROM tbl_OrderRoom where (( ? BETWEEN checkinDay AND checkoutDay) OR ( ? BETWEEN checkinDay AND checkoutDay) OR (checkinDay BETWEEN ? AND ? ))AND status <> 'finished')
+

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datlt.controllers;
+package datlt.controllers.user;
 
-import datlt.dtos.RegistrationErrorObject;
-import datlt.models.RegistrationDAO;
+import datlt.dtos.CartObject;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,13 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author LEE
  */
-public class LoginController extends HttpServlet {
-
-    private static final String ERROR = "error.jsp";
-    private static final String ADMIN = "admin/admin.jsp";
-    private static final String USER = "UserGetAllRoomController";
-    private static final String STAFF = "StaffGetAllBillController";
-    private static final String INVALID = "index.jsp";
+public class UserEditShoppingCartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,42 +31,26 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            String username = request.getParameter("txtUsername");
-            String password = request.getParameter("txtPassword");
-            RegistrationDAO dao = new RegistrationDAO();
-            String role = dao.login(username, password);
-            RegistrationErrorObject errorObj = new RegistrationErrorObject();
-            if (role.equals("failed")) {
-                errorObj.setUsernameError("Invalid username or password");
-                request.setAttribute("INVALID", errorObj);
-                url = INVALID;
+            String action = request.getParameter("action");
+            HttpSession session = request.getSession();
+            CartObject shoppingCart = (CartObject) session.getAttribute("CART");
+            if (action.equals("Delete")) {
+                String id = request.getParameter("txtID");
+                shoppingCart.remove(id);
+            } else if (action.equals("Update")) {
+                String id = request.getParameter("txtID");
+                String quantity = request.getParameter("txtQuantity");
+                int quan = Integer.parseInt(quantity);
+                shoppingCart.update(id, quan);
             } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("USER", username);
-                if (role.equals("admin")) {
-                    url = ADMIN;
-                    session.setAttribute("ROLE", role);
-                } else if (role.equals("user")) {
-                    url = USER;
-                    session.setAttribute("ROLE", role);
-                } else if (role.equals("staff")) {
-                    url = STAFF;
-                    session.setAttribute("ROLE", role);
-                } else if (role.equals("banned")) {
-                    errorObj.setUsernameError("Your account was banned");
-                    request.setAttribute("INVALID", errorObj);
-                    url = INVALID;
-                } else {
-                    request.setAttribute("ERROR", "ROLE IS INVALID");
-                }
+                request.setAttribute("ERROR", "Action is not valid");
             }
+            session.setAttribute("CART", shoppingCart);
         } catch (Exception e) {
-            log("Error at LoginController" + e.getMessage());
-
+            log("Error at Edit Shopping cart controller " + e.getMessage());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect("user/viewCart.jsp");
         }
     }
 

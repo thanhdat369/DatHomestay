@@ -98,7 +98,7 @@ public class RoomDAO implements Serializable {
             preStm.setString(1, "%" + search + "%");
             rs = preStm.executeQuery();
             result = new ArrayList<RoomDTO>();
-            while (rs.next()) {
+            if (rs.next()) {
                 id = rs.getString("roomID");
                 gia = rs.getFloat("roomPrice");
                 des = rs.getString("roomDes");
@@ -196,6 +196,37 @@ public class RoomDAO implements Serializable {
         }
         return check;
 
+    }
+
+    public List<RoomDTO> getAvailableRoom(String checkinDay, String checkoutDay) throws Exception {
+        List<RoomDTO> result = null;
+        RoomDTO dto;
+        String id, des, imgLink;
+        float price;
+        try {
+            String sql = "SELECT roomID,roomPrice,roomDes,roomImgLink FROM tbl_Room where isDelete='false' AND roomID NOT IN "
+                    + "(SELECT roomID FROM tbl_OrderRoom where (( ? BETWEEN checkinDay AND checkoutDay) OR "
+                    + "( ? BETWEEN checkinDay AND checkoutDay) OR (checkinDay BETWEEN ? AND ? ))AND status <> 'finished')";
+            conn = MyConnection.getMyConnection();
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, checkinDay);
+            preStm.setString(2, checkoutDay);
+            preStm.setString(3, checkinDay);
+            preStm.setString(4, checkoutDay);
+            rs = preStm.executeQuery();
+            result = new ArrayList<RoomDTO>();
+            while (rs.next()) {
+                id = rs.getString("roomID");
+                price = rs.getFloat("roomPrice");
+                des = rs.getString("roomDes");
+                imgLink = rs.getString("roomImgLink");
+                dto = new RoomDTO(id, price, des, imgLink);
+                result.add(dto);
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
     }
 
 }

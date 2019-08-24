@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Product Price</label>
-                                    <input class="form-control" placeholder="Price" name="txtProPrice" type="number" step="any" value="${requestScope.DTO_PRODUCT.proPrice}" max="1000000000" required/>
+                                    <input class="form-control" placeholder="Price" name="txtProPrice" type="number" step="any" value="${requestScope.DTO_PRODUCT.proPrice}" min="0" max="1000000000" required/>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>

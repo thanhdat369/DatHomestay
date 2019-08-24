@@ -5,6 +5,7 @@
  */
 package datlt.idprocess;
 
+import datlt.models.OrderProductDAO;
 import datlt.models.RoomOrderDAO;
 import java.io.Serializable;
 
@@ -24,6 +25,20 @@ public class IDCreating implements Serializable {
             long temp = Long.parseLong(id.substring(3));
             temp++;
             id = "RO-" + temp;
+        }
+        return id;
+    }
+
+    public static String createOrderProductID() throws Exception {
+        String id;
+        OrderProductDAO dao = new OrderProductDAO();
+        id = dao.getLastID();
+        if (id.equals("norecord")) {
+            id = "PR-1";
+        } else {
+            long temp = Long.parseLong(id.substring(3));
+            temp++;
+            id = "PR-" + temp;
         }
         return id;
     }

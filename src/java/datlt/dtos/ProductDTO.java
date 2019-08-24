@@ -11,12 +11,17 @@ import java.io.Serializable;
  *
  * @author LEE
  */
-public class ProductDTO implements Serializable{
-    private String proID,proName;
-    private float proPrice;
-    private String proDes,proType,proImgLink;
-    private int proQuantity;
+public class ProductDTO implements Serializable {
 
+    private String proID, proName;
+    private float proPrice;
+    private String proDes, proType, proImgLink;
+    private int proQuantity;
+    private int quantityBuy;
+
+    public ProductDTO() {
+    }
+    
     public ProductDTO(String proName, float proPrice, String proDes, String proType, String proImgLink, int proQuantity) {
         this.proName = proName;
         this.proPrice = proPrice;
@@ -36,6 +41,14 @@ public class ProductDTO implements Serializable{
         this.proQuantity = proQuantity;
     }
 
+    public int getQuantityBuy() {
+        return quantityBuy;
+    }
+
+    public void setQuantityBuy(int quantityBuy) {
+        this.quantityBuy = quantityBuy;
+    }
+
     public int getProQuantity() {
         return proQuantity;
     }
@@ -43,7 +56,7 @@ public class ProductDTO implements Serializable{
     public void setProQuantity(int proQuantity) {
         this.proQuantity = proQuantity;
     }
-    
+
     public String getProID() {
         return proID;
     }
@@ -91,5 +104,5 @@ public class ProductDTO implements Serializable{
     public void setProImgLink(String proImgLink) {
         this.proImgLink = proImgLink;
     }
-    
+
 }

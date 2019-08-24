@@ -94,7 +94,7 @@
                                         <br/>
                                     </fieldset>
                                     <div class="text-center alert alert-info">
-                                        <span>Already registered? <a href="index.jsp">Sign In</a></span>
+                                        <span>Already registered? <a href="/DatHomestay/index.jsp">Sign In</a></span>
                                     </div>
                                 </form>
                             </div>

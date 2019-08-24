@@ -157,4 +157,36 @@ public class RoomOrderDAO implements Serializable {
         }
         return roomID;
     }
+
+    public List<RoomOrderObject> getHistory(String username) throws Exception {
+        List<RoomOrderObject> result = null;
+        RoomOrderObject dto = null;
+        try {
+            String sql = "SELECT orderRoomID,roomPrice,roomID,checkinDay,checkoutDay,total,staffUsername,status FROM tbl_OrderRoom where customerUsername=? ORDER BY createTime DESC";
+            conn = MyConnection.getMyConnection();
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, username);
+            rs = preStm.executeQuery();
+            result = new ArrayList<RoomOrderObject>();
+            while (rs.next()) {
+                String orderRoomID, roomID, checkinDay, checkoutDay, staffUsername, status;
+                float total, roomPrice;
+                orderRoomID = rs.getString("orderRoomID");
+                roomID = rs.getString("roomID");
+                checkinDay = rs.getString("checkinDay");
+                checkoutDay = rs.getString("checkoutDay");
+                total = rs.getFloat("total");
+                roomPrice = rs.getFloat("roomPrice");
+                staffUsername = rs.getString("staffUsername");
+                status = rs.getString("status");
+                dto = new RoomOrderObject(orderRoomID, roomID, roomPrice, checkinDay, checkoutDay, username, total);
+                dto.setStaffUsername(staffUsername);
+                dto.setStatus(status);
+                result.add(dto);
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
 }

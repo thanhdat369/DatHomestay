@@ -20,23 +20,8 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="/DatHomestay/StaffGetAllBillController" class="active"><i class="fa fa-dashboard fa-fw"></i> User Manager</a>
+                    <a href="/DatHomestay/StaffGetAllBillController" class="active"><i class="fa fa-dashboard fa-fw"></i>ALL BILL</a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Room<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="">Manager Room</a>
-                        </li>
-                        <li>
-                            <a href="">Add New Room</a>
-                        </li>
-                        <li>
-                            <a href="">List Deleted Room</a>
-                        </li>
-                    </ul>
-                </li>
-
         </div>
     </div>
 </nav>

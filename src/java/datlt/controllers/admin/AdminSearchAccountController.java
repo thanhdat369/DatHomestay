@@ -41,7 +41,7 @@ public class AdminSearchAccountController extends HttpServlet {
             List<RegistrationDTO> list = dao.findByLikeName(search, adminName);
             request.setAttribute("INFO_USER", list);
         } catch (Exception e) {
-            log("Error at Search user " + e.getMessage());
+            log("Error at Search Account " + e.getMessage());
         } finally {
             request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
         }

@@ -35,8 +35,7 @@
                     <div class="user-menu">
                         <ul>
                             <li><span> Hello , ${sessionScope.USER}<span></li>
-                            <li><a href="#"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="LogoutController"><i class="fa fa-user"></i> Logout</a></li>
+                            <li><a href="/DatHomestay/LogoutController"><i class="fa fa-user"></i> Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -44,4 +43,4 @@
         </div>
     </div> 
   </body>
-  </html>
+</html>
