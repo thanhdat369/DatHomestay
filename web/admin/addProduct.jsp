@@ -22,7 +22,7 @@
                             <form action="/DatHomestay/AdminProductMainController" method="POST">
                                 <div class="form-group">
                                     <label>Product Name</label>
-                                    <input class="form-control" placeholder="Product Name" name="txtProName" type="text" maxlength="100"/>
+                                    <input class="form-control" placeholder="Product Name" name="txtProName" type="text" maxlength="100" required/>
                                 </div>
                                 <div class="form-group">
                                     <label>Product Price</label>
