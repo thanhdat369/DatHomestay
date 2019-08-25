@@ -55,7 +55,6 @@ public class SignUpController extends HttpServlet {
                 RegistrationDTO dto = new RegistrationDTO(username, password, fullname, email, phoneNo, role);
                 RegistrationDAO dao = new RegistrationDAO();
                 boolean check = dao.signUp(dto);
-                System.out.println(check);
                 if (check) {
                     url = SUCCESS;
                 } else {

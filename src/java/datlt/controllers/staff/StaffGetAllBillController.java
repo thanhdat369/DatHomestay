@@ -35,7 +35,6 @@ public class StaffGetAllBillController extends HttpServlet {
         try {
             RoomOrderDAO dao = new RoomOrderDAO();
             List<RoomOrderObject> list = dao.getAllBillBookedForStaff();
-            System.out.println("List size: " + list.size());
             request.setAttribute("INFO_BILLCHECKOUT", list);
         } catch (Exception e) {
             log("Error at Staff Get All Bill Check Out" + e.getMessage());

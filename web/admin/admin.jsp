@@ -16,7 +16,7 @@
         <script type="text/javascript">
             function isDelete(username)
             {
-                var check = confirm("Do you want to delete " + username+ " ?");
+                var check = confirm("Do you want to delete " + username + " ?");
                 return check;
             }
         </script>

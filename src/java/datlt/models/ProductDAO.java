@@ -90,7 +90,7 @@ public class ProductDAO implements Serializable {
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, id);
             rs = preStm.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 String proName;
                 float proPrice;
                 String proDes, proType, proImgLink;
@@ -242,7 +242,7 @@ public class ProductDAO implements Serializable {
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, id);
             rs = preStm.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 name = rs.getString("proName");
             }
         } finally {

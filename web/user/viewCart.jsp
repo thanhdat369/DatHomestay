@@ -50,7 +50,7 @@
                                         <tr>
                                             <td>${counter.count}</td>
                                             <td>${dto.proName}
-                                                <img src=" ${dto.proImgLink}" style="width: 100px;height: 100px;" class="img-thumbnail"/>
+                                                <img src=" ${dto.proImgLink}" style="width: 50px;height: 50px;" class="img-thumbnail"/>
                                             </td>
                                             <td>${dto.proPrice}</td>
                                             <td>

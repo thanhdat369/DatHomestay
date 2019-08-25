@@ -124,7 +124,7 @@ public class RegistrationDAO implements Serializable {
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, id);
             rs = preStm.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 fullname = rs.getString("FullName");
                 role = rs.getString("role");
                 email = rs.getString("email");

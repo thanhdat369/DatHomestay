@@ -40,7 +40,6 @@ public class UserGetAllRoomBillHistoryController extends HttpServlet {
                 RoomOrderDAO dao = new RoomOrderDAO();
                 List<RoomOrderObject> list = dao.getHistory(username);
                 request.setAttribute("INFO_BILLROOM", list);
-                System.out.println("List "+ list.size());
             }
         } catch (Exception e) {
             log("Error at UserGetAllRoomBillHistory " + e.getMessage());

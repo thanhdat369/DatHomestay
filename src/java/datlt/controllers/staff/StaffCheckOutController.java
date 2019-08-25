@@ -36,7 +36,6 @@ public class StaffCheckOutController extends HttpServlet {
         try {
             RoomOrderDAO dao = new RoomOrderDAO();
             String orderRoomID = request.getParameter("txtOrderRoomID");
-            System.out.println(orderRoomID);
             HttpSession session = request.getSession();
             String staffUsername = (String) session.getAttribute("USER");
             boolean check = dao.checkoutRoom(staffUsername, orderRoomID);

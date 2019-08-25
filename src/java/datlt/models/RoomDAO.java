@@ -98,7 +98,7 @@ public class RoomDAO implements Serializable {
             preStm.setString(1, "%" + search + "%");
             rs = preStm.executeQuery();
             result = new ArrayList<RoomDTO>();
-            if (rs.next()) {
+            while (rs.next()) {
                 id = rs.getString("roomID");
                 gia = rs.getFloat("roomPrice");
                 des = rs.getString("roomDes");
@@ -122,7 +122,7 @@ public class RoomDAO implements Serializable {
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, id);
             rs = preStm.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 gia = rs.getFloat("roomPrice");
                 des = rs.getString("roomDes");
                 imgLink = rs.getString("roomImgLink");

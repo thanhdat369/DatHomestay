@@ -51,7 +51,10 @@
                                                 <c:forEach items="${requestScope.INFO_ROOM}" var="room" varStatus="counter">
                                                     <tr>
                                                         <td>${counter.count}</td>
-                                                        <td>${room.roomID}</td>
+                                                        <td>${room.roomID}
+                                                            <br/>
+                                                            <img src="${room.roomImgLink}" class="img-thumbnail" style="width: 300px;height: 175px;" alt="${room.roomID}">
+                                                        </td>
                                                         <td>${room.roomPrice}</td>
                                                         <td>
                                                             ${room.roomDes}
